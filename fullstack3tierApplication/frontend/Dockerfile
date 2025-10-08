@@ -1,23 +1,28 @@
-# Use the official image as a parent image
-# Description: Dockerfile for the client side of the MERN stack application
-
-# Use the official image as a parent image
+# step-1 ---- CALLNG FROM BASE IMAGE USING FROM KEYWORD
 FROM node:18.9.1
 
-# Set the working directory
+# Step-2 --- spcifyng which work directory we are using
 WORKDIR /app
 
-# Copy the file from your host to your current location
+# step-3 ---- Copyin all the required files from our package.json
 COPY package.json .
+# FROM our package.json we will copy everything into our main directory HERE
+# from PACKAGE.JSON ------>> . (Here in this)
 
-# Run the command inside your image filesystem
+#Step-4 ----- The run command which will help in running
 RUN npm install
+# This command ensures that this Command will run first and will 
+# Install all the dependencies here itself
 
-# Inform Docker that the container is listening on the specified port at runtime
-EXPOSE 5173
-
-# Copy the rest of your app's source code from your host to your image filesystem
+# Step-5 ---- After installing the required packages now we will copy the complete source code
 COPY . .
 
-# Run the specified command within the container
-CMD ["npm", "run", "dev"]
+# Step-6 --- Now we neeed to give access to the port basically exposing hte port
+EXPOSE 5173
+
+# Step-7 --- Now Simply running a CMD command we can also use ENTRYPOINT Command
+RUN ["npm" , "run", "dev"]
+
+
+# WE WILL USE A COMMAN NETWORK FOR MERGING THE 
+# FRONT-END AND THE BACKEND
